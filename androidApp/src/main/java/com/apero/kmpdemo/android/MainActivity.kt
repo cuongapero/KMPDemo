@@ -1,7 +1,6 @@
 package com.apero.kmpdemo.android
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -13,10 +12,20 @@ import com.apero.composeapp.presentation.home.BannerSection
 import com.apero.composeapp.presentation.home.CategorySection
 import com.apero.composeapp.presentation.home.HomeScreen
 import com.apero.composeapp.presentation.home.TrendingSection
+import com.apero.kmpdemo.android.base.BaseActivity
 import com.apero.kmpdemo.domain.model.Category
 import com.apero.kmpdemo.domain.model.Style
+import com.apero.picker_image.AndroidImagePicker
 
-class MainActivity : ComponentActivity() {
+class MainActivity : BaseActivity() {
+    private lateinit var imagePicker: AndroidImagePicker
+
+    override fun initializeActivityResults() {
+        // Initialize your image picker and register activity results here
+        imagePicker = AndroidImagePicker(this)
+        imagePicker.setup()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -25,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeScreen()
+                    HomeScreen(imagePicker)
                 }
             }
         }

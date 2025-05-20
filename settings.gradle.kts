@@ -20,3 +20,4 @@ rootProject.name = "KMPDemo"
 include(":androidApp")
 include(":shared")
 include(":composeApp")
+include(":picker_image")

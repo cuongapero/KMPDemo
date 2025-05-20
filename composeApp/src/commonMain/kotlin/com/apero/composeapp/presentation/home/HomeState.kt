@@ -10,4 +10,5 @@ data class HomeState(
     val banners: List<Style> = emptyList(),
     val trending: Category? = null,
     val categories: List<Category> = emptyList(),
+    val selectedImageUri: String? = null,
 ) : MviViewState

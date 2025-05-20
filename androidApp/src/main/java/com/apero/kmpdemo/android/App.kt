@@ -2,6 +2,7 @@ package com.apero.kmpdemo.android
 
 import android.app.Application
 import com.apero.composeapp.di.presentationModule
+import com.apero.kmpdemo.android.di.androidModule
 import com.apero.kmpdemo.di.appModule
 import com.apero.kmpdemo.di.databaseModule
 import com.apero.kmpdemo.di.networkModule
@@ -22,7 +23,8 @@ class App : Application() {
                 appModule,
                 networkModule,
                 databaseModule,
-                presentationModule
+                presentationModule,
+                androidModule
             )
         }
     }

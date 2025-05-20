@@ -7,4 +7,5 @@ import com.apero.kmpdemo.domain.model.Category
 sealed interface HomeIntent : MviIntent {
     data object LoadCategories : HomeIntent
     data class SelectCategory(val category: Category) : HomeIntent
+    data object PickImage : HomeIntent
 } 

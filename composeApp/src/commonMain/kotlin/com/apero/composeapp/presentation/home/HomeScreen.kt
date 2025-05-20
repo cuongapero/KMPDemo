@@ -2,6 +2,7 @@ package com.apero.composeapp.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,20 +41,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.apero.kmpdemo.domain.model.Category
 import com.apero.kmpdemo.domain.model.Style
+import com.apero.picker_image.ImagePicker
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil3.CoilImage
 import kmpdemo.composeapp.generated.resources.Res
 import kmpdemo.composeapp.generated.resources.banner_1
+import kmpdemo.composeapp.generated.resources.ic_add
 import kmpdemo.composeapp.generated.resources.ic_see_all
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.vectorResource
-import org.koin.mp.KoinPlatform.getKoin
 
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = getKoin().get()
+expect fun HomeScreen(imagePicker: ImagePicker)
+
+@Composable
+internal fun HomeScreenContent(
+    viewModel: HomeViewModel,
+    modifier: Modifier = Modifier
 ) {
     val state by viewModel.viewState.collectAsState()
 
@@ -71,6 +77,26 @@ fun HomeScreen(
             trending = state.trending,
             categories = state.categories
         )
+
+        // Add FloatingActionButton
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 16.dp, bottom = 100.dp)
+                .size(56.dp)
+                .clip(CircleShape)
+                .background(Color.Blue)
+                .clickable {
+                    viewModel.processIntent(HomeIntent.PickImage)
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(Res.drawable.ic_add),
+                contentDescription = "Pick Image",
+                tint = Color.White
+            )
+        }
     }
 }
 

@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -9,10 +10,12 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
+    androidTarget()
+
+    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget> {
         compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
+            compilerOptions.configure {
+                jvmTarget.set(JvmTarget.JVM_17)
             }
         }
     }
@@ -61,12 +64,14 @@ kotlin {
                 implementation(libs.androidx.lifecycle.viewmodel.compose)
                 implementation(libs.landscapist.coil)
                 implementation(project(":shared"))
+                implementation(project(":picker_image"))
             }
         }
 
         androidMain {
             dependencies {
                 implementation(libs.compose.ui.tooling.preview)
+                implementation(libs.androidx.activity.compose)
             }
         }
 
@@ -95,9 +100,6 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
-    }
     namespace = "com.apero.composeapp"
     
     compileOptions {
@@ -121,7 +123,7 @@ tasks.register("assembleXCFramework") {
 
     dependsOn(
         iosTargets.map {
-            it.binaries.getFramework("DEBUG").linkTask
+            it.binaries.getFramework("DEBUG").linkTaskProvider
         }
     )
 
