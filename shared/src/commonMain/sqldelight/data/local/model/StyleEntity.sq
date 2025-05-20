@@ -1,0 +1,19 @@
+CREATE TABLE StyleEntity (
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    categoryId TEXT NOT NULL,
+    thumbnail TEXT NOT NULL
+);
+
+insertStyle:
+INSERT OR REPLACE INTO StyleEntity(id, name, description, categoryId, thumbnail)
+VALUES (?, ?, ?, ?, ?);
+
+getStylesByCategory:
+SELECT *
+FROM StyleEntity
+WHERE categoryId = ?;
+
+deleteAllStyles:
+DELETE FROM StyleEntity; 
