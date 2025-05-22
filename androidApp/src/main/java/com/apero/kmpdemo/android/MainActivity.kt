@@ -15,19 +15,16 @@ import com.apero.composeapp.presentation.home.TrendingSection
 import com.apero.kmpdemo.android.base.BaseActivity
 import com.apero.kmpdemo.domain.model.Category
 import com.apero.kmpdemo.domain.model.Style
-import com.apero.picker_image.AndroidImagePicker
+import com.apero.picker_image.ImagePicker
+import org.koin.android.ext.android.get
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : BaseActivity() {
-    private lateinit var imagePicker: AndroidImagePicker
-
-    override fun initializeActivityResults() {
-        // Initialize your image picker and register activity results here
-        imagePicker = AndroidImagePicker(this)
-        imagePicker.setup()
-    }
+    private lateinit var imagePicker: ImagePicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        imagePicker = get { parametersOf(this) }
         setContent {
             MyApplicationTheme {
                 Surface(

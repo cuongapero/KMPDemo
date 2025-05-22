@@ -1,6 +1,7 @@
 package com.apero.kmpdemo.android
 
 import android.app.Application
+import com.apero.composeapp.di.imagePickerModule
 import com.apero.composeapp.di.presentationModule
 import com.apero.kmpdemo.android.di.androidModule
 import com.apero.kmpdemo.di.appModule
@@ -24,7 +25,8 @@ class App : Application() {
                 networkModule,
                 databaseModule,
                 presentationModule,
-                androidModule
+                androidModule,
+                imagePickerModule
             )
         }
     }

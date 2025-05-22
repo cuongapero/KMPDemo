@@ -1,5 +1,6 @@
 package com.apero.composeapp
 
+import com.apero.composeapp.di.imagePickerModule
 import com.apero.composeapp.di.presentationModule
 import com.apero.kmpdemo.di.appModule
 import com.apero.kmpdemo.di.databaseModule
@@ -15,6 +16,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
             networkModule,
             databaseModule,
             presentationModule,
+            imagePickerModule
         )
     }
 
