@@ -18,7 +18,8 @@ class IosImagePicker(
     private var permissionContinuation: CancellableContinuation<Boolean>? = null
 
     override suspend fun hasPermission(): Boolean {
-        return PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatusAuthorized
+//        return PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatusAuthorized
+        return true
     }
 
     override suspend fun requestPermission(): Boolean = suspendCancellableCoroutine { continuation ->

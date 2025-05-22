@@ -45,17 +45,18 @@ class AndroidImagePicker(private val activity: ComponentActivity) : ImagePicker 
     }
 
     override suspend fun hasPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.READ_MEDIA_IMAGES
-            ) == PackageManager.PERMISSION_GRANTED
-        } else {
-            ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        }
+//        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            ContextCompat.checkSelfPermission(
+//                activity,
+//                Manifest.permission.READ_MEDIA_IMAGES
+//            ) == PackageManager.PERMISSION_GRANTED
+//        } else {
+//            ContextCompat.checkSelfPermission(
+//                activity,
+//                Manifest.permission.READ_EXTERNAL_STORAGE
+//            ) == PackageManager.PERMISSION_GRANTED
+//        }
+        return true
     }
 
     override suspend fun requestPermission(): Boolean = suspendCancellableCoroutine { continuation ->
